@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">
+
+	<!-- 유저 생성 -->
+	<insert id="insertUser"
+		parameterType="com.hansung.web.model.User">
+		insert into users (authority, email, enabled, password,
+		username, address) values(
+		#{authority},
+		#{email},
+		#{enabled},
+		#{password},
+		#{username},
+		#{address}
+		)
+	</insert>
+
+	<!-- 유저 비밀번호 변경 -->
+	<update id="updateUser"
+		parameterType="com.hansung.web.model.User">
+		update users set password=#{password},
+		where userId=#{userId}
+	</update>
+
+	<select id="getUser" resultType="com.hansung.web.model.User">
+		select userId, authority, email, enabled, password, username, address, cart from users where
+		userId=#{userId}
+	</select>
+
+	<!-- select는 반드시 resultType이 있어야 함 -->
+	<select id="getUserName" resultType="com.hansung.web.model.User">
+		select userId, authority, email, enabled, password, username, address, cart from users where
+		username=#{username}
+	</select>
+
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteUser"
+		parameterType="com.hansung.web.model.Product">
+		delete from users where userId=#{userId}
+	</delete>
+
+
+	<!-- 모든 회원 조회 -->
+	<select id="getAllUser" resultType="com.hansung.web.model.User">
+		select userId, authority, email, enabled, password, username, address, cart from users;
+	</select>
+	
+	<!-- 회원 권한, 활성상태 변경 -->
+	<update id="updateAuthority"
+		parameterType="com.hansung.web.model.User">
+		update users set authority=#{authority},
+		enabled=#{enabled}
+		where userId=#{userId}
+	</update>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 class와 같은 개념이라고 이해하면 됨 -->
+<mapper namespace="Cart">
+	
+	<!-- 장바구니는 유저 전용 기능, 관리자는 관여 안함-->
+	<!-- 장바구니 추가 -->
+	<insert id="insertCart">
+		INSERT INTO cart(
+		userid, productid, amount,
+		productname, productprice, totalprice
+		) VALUES (
+		#{userid},
+		#{productid}, #{amount}, #{productname}, #{productprice},
+		#{totalprice}
+		)
+	</insert>
+
+	<!-- 장바구니 목록 -->
+	<select id="listCart" resultType="com.hansung.web.model.Cart">
+		select * from cart left outer join product on
+		cart.productid=product.productid where userid = #{userid}
+	</select>
+
+	<!-- 장바구니 전체 금액 -->
+	<select id="sumMoney" resultType="int">
+		SELECT IFNULL(SUM(price *
+		amount), 0) money
+		FROM cart c, product p
+		WHERE c.productid =
+		p.productid
+		AND c.userid = #{userid}
+	</select>
+
+	<!-- 장바구니 수정 -->
+	<update id="modifyCart">
+		UPDATE cart
+		SET amount = #{amount}
+		WHERE userid=
+		#{userid}
+		AND productid = #{productid}
+	</update>
+
+	<!-- 장바구니 아이템 삭제 -->
+	<delete id="deleteCart">
+		DELETE FROM cart
+		WHERE id = #{id}
+	</delete>
+
+	<!-- 장바구니에 동일한 상품 레코드 확인 -->
+	<select id="countCart" resultType="int">
+		SELECT COUNT(*)
+		FROM cart
+		WHERE
+		userid= #{userid}
+		AND productid = #{productid}
+	</select>
+
+	<!-- 서비스 로직을 거쳐 장바구니에 동일한 상품이 존재한다고 판정되면 insert가 아니라 update -->
+	<update id="updateCart">
+		UPDATE cart
+		SET amount = amount + #{amount}
+		WHERE
+		userid= #{userid}
+		AND productid = #{productid}
+	</update>
+
+	<!-- 해당 유저 장바구니 전체 삭제 -->
+	<delete id="deleteAllCart">
+		DELETE FROM cart
+		WHERE userid = #{userid}
+	</delete>
+
+</mapper>

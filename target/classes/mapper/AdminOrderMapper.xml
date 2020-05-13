@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminOrderMapper">
+
+	<!-- 관리자 모든 유저의 주문목록 확인 -->
+	<select id="adminOrderList"
+		resultType="com.hansung.web.model.Order">
+		select
+		orderid, username,
+		recipient,
+		address, phonenumber,
+		orderprice,
+		payment, orderdate, delivery
+		from
+		orders
+	</select>
+
+	<!-- 총 주문목록 개수 -->
+	<select id="adminOrderCount" parameterType="int" resultType="int">
+		select count(orderid) from orders
+	</select>
+
+	<!-- 페이징처리해서 조회 -->
+	<select id="adminOrderListPaging" parameterType="hashMap"
+		resultType="com.hansung.web.model.Order">
+		select
+		orderid, username,
+		recipient,
+		address, phonenumber,
+		orderprice,
+		payment, orderdate, delivery
+		from orders
+		order by orderid desc
+		limit #{displayPost}, #{postNum}
+	</select>
+
+	<!--관리자 특정 주문번호 목록(주문번호를 통한 검색) -->
+	<select id="adminOrderView"
+		resultType="com.hansung.web.model.OrderList">
+		select
+		o.orderid, o.username,
+		o.recipient, o.address,
+		o.phonenumber, o.orderprice,
+		o.payment,
+		o.orderdate,
+		d.orderdetailid,
+		d.productid, d.amount,
+		p.name,
+		p.imageFilename, p.price
+		from orders o
+		inner join orderdetail d
+		on
+		o.orderid = d.orderid
+		inner join product p
+		on
+		d.productid = p.productid
+		where o.orderid = #{orderid}
+	</select>
+
+	<!-- 배송 상태 변경 -->
+	<update id="adminUpdateDelivery">
+		update orders
+		set delivery = #{delivery}
+		where orderid
+		= #{orderid}
+
+	</update>
+</mapper>

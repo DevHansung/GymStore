@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 class와 같은 개념이라고 이해 -->
+<mapper namespace="ProductMapper">
+
+	<!-- 관리자 기능 -->
+	<insert id="insertProduct"
+		parameterType="com.hansung.web.model.Product">
+		insert into product (name, category, price,
+		manufacturer,
+		unitInStock, description, imageFilename)
+		values(
+		#{name},
+		#{category},
+		#{price},
+		#{manufacturer},
+		#{unitInStock},
+		#{description},
+		#{imageFilename}
+		)
+	</insert>
+
+	<!-- 관리자 기능 -->
+	<update id="updateProduct"
+		parameterType="com.hansung.web.model.Product">
+		update product set category=#{category},
+		description=#{description},
+		imageFilename=#{imageFilename},
+		manufacturer=#{manufacturer},
+		name=#{name}, price=#{price},
+		unitInStock=#{unitInStock} where productid=#{productid}
+	</update>
+
+	<delete id="deleteProduct"
+		parameterType="com.hansung.web.model.Product">
+		delete from product where productid=#{productid}
+	</delete>
+
+
+	<select id="getAllProduct"
+		resultType="com.hansung.web.model.Product">
+		select productid, category, description, imageFilename,
+		manufacturer, name, price, unitInStock from product;
+	</select>
+
+	<!-- 카테고리별로 조회 -->
+	<select id="getProductCategory"
+		resultType="com.hansung.web.model.Product">
+		SELECT productid, category, description, imageFilename,
+		manufacturer, name, price, unitInStock FROM product where category =
+		#{category}
+	</select>
+
+
+	<!-- select는 반드시 resultType이 있어야 함 -->
+	<select id="getProduct"
+		resultType="com.hansung.web.model.Product">
+		select productid, category, description, imageFilename,
+		manufacturer, name, price, unitInStock from product where
+		productid=#{productid}
+	</select>
+
+	<!-- 페이징처리 전체 조회부분 -->
+	<!-- 총 상품 개수 -->
+	<select id="getProductCount" parameterType="int"
+		resultType="int">
+		select count(productid) from product
+	</select>
+
+	<!-- 카테고리별 상품 개수 -->
+	<select id="getProductCategotyCount" parameterType="String"
+		resultType="int">
+		select count(productid) from product where category =
+		#{category}
+	</select>
+
+	<!-- 페이징처리해서 조회 -->
+	<select id="getAllProductPaging" parameterType="hashMap"
+		resultType="com.hansung.web.model.Product">
+		select
+		productid, category, description, imageFilename,
+		manufacturer,
+		name, price, unitInStock
+		from product
+		order by productid
+		desc
+		limit
+		#{displayPost}, #{postNum}
+	</select>
+
+	<!-- 페이징처리 카테고리별 조회부분 -->
+	<!-- 카테고리별 상품 총 개수 -->
+	<select id="getProductCategoryCount" parameterType="int"
+		resultType="int">
+		select count(productid) from product
+	</select>
+
+	<!-- 카테고리별로 페이징처리 해서 조회 -->
+	<select id="getProductCategoryPaging"
+		resultType="com.hansung.web.model.Product">
+		SELECT productid, category, description, imageFilename,
+		manufacturer, name, price, unitInStock FROM product where category =
+		#{category}
+		order by productid
+		desc
+		limit
+		#{displayPost}, #{postNum}
+	</select>
+
+</mapper>

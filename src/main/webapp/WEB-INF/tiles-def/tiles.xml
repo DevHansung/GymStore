@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="base"
+		template="/WEB-INF/tamplates/layout.jsp">
+		<put-attribute name="title" value="Estore homepage" />
+		<put-attribute name="menu"
+			value="/WEB-INF/tamplates/menu.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/tamplates/footer.jsp" />
+	</definition>
+
+	<definition name="home" extends="base">
+		<put-attribute name="title" value="My Estore homepage" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/home/home.jsp" />
+	</definition>
+
+	<definition name="products" extends="base">
+		<put-attribute name="title" value="Products homepage" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/products.jsp" />
+	</definition>
+
+	<definition name="cartList" extends="base">
+		<put-attribute name="title" value="cart homepage" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cart/cartList.jsp" />
+	</definition>
+
+	<definition name="orderForm" extends="base">
+		<put-attribute name="title" value="order homepage" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/order/orderForm.jsp" />
+	</definition>
+
+	<definition name="orderList" extends="base">
+		<put-attribute name="title" value="order homepage" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/order/orderList.jsp" />
+	</definition>
+
+	<definition name="orderListDetail" extends="base">
+		<put-attribute name="title" value="order homepage" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/order/orderListDetail.jsp" />
+	</definition>
+
+	<definition name="orderSuccess" extends="base">
+		<put-attribute name="title" value="order homepage" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/order/orderSuccess.jsp" />
+	</definition>
+
+	<definition name="admin" extends="base">
+		<put-attribute name="title"
+			value="Administrator homepage" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/admin.jsp" />
+	</definition>
+
+	<definition name="adminProductInventory" extends="base">
+		<put-attribute name="title"
+			value="Product Inventory page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminProductInventory.jsp" />
+	</definition>
+
+	<definition name="adminAddProduct" extends="base">
+		<put-attribute name="title" value="Add Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminAddProduct.jsp" />
+	</definition>
+
+	<definition name="adminUpdateProduct" extends="base">
+		<put-attribute name="title" value="Update Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminUpdateProduct.jsp" />
+	</definition>
+
+	<definition name="adminViewBoard" extends="base">
+		<put-attribute name="title" value="Update Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminViewBoard.jsp" />
+	</definition>
+
+	<definition name="adminUserManagement" extends="base">
+		<put-attribute name="title" value="Update Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminUserManagement.jsp" />
+	</definition>
+
+	<definition name="adminUserList" extends="base">
+		<put-attribute name="title" value="Update Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminUserList.jsp" />
+	</definition>
+
+	<definition name="adminOrderList" extends="base">
+		<put-attribute name="title" value="Update Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminOrderList.jsp" />
+	</definition>
+
+	<definition name="adminOrderListDetail" extends="base">
+		<put-attribute name="title" value="Update Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminOrderListDetail.jsp" />
+	</definition>
+
+	<definition name="adminUpdateDelivery" extends="base">
+		<put-attribute name="title" value="Update Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminUpdateDelivery.jsp" />
+	</definition>
+
+	<definition name="adminWriteBoard" extends="base">
+		<put-attribute name="title" value="Update Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminWriteBoard.jsp" />
+	</definition>
+
+	<definition name="adminProductCategory" extends="base">
+		<put-attribute name="title" value="Update Product page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/adminProductCategory.jsp" />
+	</definition>
+
+	<definition name="login" extends="base">
+		<put-attribute name="title" value="Login page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/login/login.jsp" />
+	</definition>
+
+	<definition name="registerUser" extends="base">
+		<put-attribute name="title" value="Registration page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/register/registerUser.jsp" />
+	</definition>
+
+	<definition name="registerUserSuccess" extends="base">
+		<put-attribute name="title"
+			value="Registration Success page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/register/registerUserSuccess.jsp" />
+	</definition>
+
+	<definition name="viewProduct" extends="base">
+		<put-attribute name="title" value="Detail View page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/viewProduct.jsp" />
+	</definition>
+
+	<definition name="productCategory" extends="base">
+		<put-attribute name="title" value="Detail View page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/productCategory.jsp" />
+	</definition>
+	
+	<definition name="viewBoard" extends="base">
+		<put-attribute name="title"
+			value="board Information page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/viewBoard.jsp" />
+	</definition>
+
+	<definition name="writeBoard" extends="base">
+		<put-attribute name="title"
+			value="board Information page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/writeBoard.jsp" />
+	</definition>
+
+	<definition name="updateBoard" extends="base">
+		<put-attribute name="title"
+			value="board Information page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/updateBoard.jsp" />
+	</definition>
+
+	<definition name="detailBoard" extends="base">
+		<put-attribute name="title"
+			value="board Information page" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/detailBoard.jsp" />
+	</definition>
+
+</tiles-definitions>

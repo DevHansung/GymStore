@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapper">
+
+	<!-- 게시판 전체 조회 -->
+	<select id="getBoardList"
+		parameterType="com.hansung.web.model.Board"
+		resultType="com.hansung.web.model.Board">
+		select boardNum, title, text, writer, date, count from
+		board
+	</select>
+
+
+	<!-- 게시판에 작성된 총 게시글 수 -->
+	<select id="getBoardCount" parameterType="int" resultType="int">
+		select count(boardNum) from board
+	</select>
+
+	<!-- 페이징처리해서 조회 -->
+	<select id="getBoardListPaging" parameterType="hashMap"
+		resultType="com.hansung.web.model.Board">
+		select
+		boardNum, title, text, writer, date, count
+		from board
+		order by boardNum desc
+		limit #{displayPost}, #{postNum}
+	</select>
+
+	<!-- 게시글 번호 get -->
+	<select id="getBoardByNumber"
+		parameterType="com.hansung.web.model.Board"
+		resultType="com.hansung.web.model.Board">
+		select boardNum, title, text, writer, date, count from
+		board
+		where
+		boardNum = #{boardNum}
+	</select>
+
+	<!-- 게시글 작성자 get -->
+	<select id="getBoardByWriter"
+		parameterType="com.hansung.web.model.Board" resultType="String">
+		select writer
+		from board
+		where
+		boardNum = #{boardNum}
+	</select>
+
+	<!-- 글쓰기 -->
+	<insert id="insertBoard">
+		insert into
+		board(
+		title
+		, text
+		, writer
+		, date)
+		values(
+		#{title}
+		, #{text}
+		, #{writer}
+		, now())
+	</insert>
+
+	<!-- 글 수정 -->
+	<update id="updateBoard">
+		update board set
+		title=#{title}
+		, text=#{text}
+		,
+		writer=#{writer}
+		, date=now()
+		where
+		boardNum=#{boardNum}
+	</update>
+
+	<!-- 조회수 -->
+	<update id="updateViewCount">
+		update board
+		set count = count + 1
+		where boardNum =
+		#{boardNum}
+	</update>
+
+	<!-- 글 삭제 -->
+	<delete id="deleteBoard">
+		delete from board
+		where
+		boardNum = #{boardNum}
+	</delete>
+</mapper>
